@@ -1,9 +1,9 @@
-import {cart, updateDeliveryOption, updateQuantity} from '../../data/cart.js';
-import {products} from '../../data/products.js';
+import {cart, updateDeliveryOption, updateQuantity} from '../data/cart.js';
+import {products} from '../data/products.js';
 import { formatCurrency } from '../utils/money.js';
-import { deleteItem } from '../../data/cart.js';
+import { deleteItem } from '../data/cart.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
-import { deliveryOptions } from '../../data/deliveryOptions.js';
+import {deliveryOptions} from '../data/deliveryOptions.js'
 import { renderOrderSummary } from './paymentSummary.js';
 
 
@@ -12,7 +12,7 @@ export function renderCheckoutHTML(){
     let checkoutDisplayHTML = '';
     cart.forEach((cartItem) => {
         const productId = cartItem.productId;
-        let matchingItem;``
+        let matchingItem;
         products.forEach((product) => {
             if( product.id === productId){
                 matchingItem = product;
