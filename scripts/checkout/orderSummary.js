@@ -45,7 +45,7 @@ export function renderCheckoutHTML(){
                       ${matchingItem.name}
                     </div>
                     <div class="product-price js-product-price-${matchingItem.id}">
-                      $${formatCurrency(matchingItem.priceCents)}
+                      $${matchingItem.priceDollar()}
                     </div>
                     <div class="product-quantity">
                       <span>
