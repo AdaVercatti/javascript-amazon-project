@@ -1,5 +1,5 @@
 import { renderCheckoutHTML } from "../../scripts/checkout/orderSummary.js";
-import { cart } from "../../scripts/data/cart.js";
+import { cart,loadLocalStorage } from "../../scripts/data/cart.js";
 import { deliveryOptions } from "../../scripts/data/deliveryOptions.js";
 
 const productId1 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6';
@@ -11,7 +11,7 @@ describe ('test suit: displays an order summary', ()=>{
             {
                 productId : productId1,
                 quantity: 1,
-                deliveryOptionId : '1'
+                deliveryOptionId : '3'
             },
             {
                 productId : productId2,
@@ -19,12 +19,22 @@ describe ('test suit: displays an order summary', ()=>{
                 deliveryOptionId: '1'
             }
         ]));
-        spyOn (Storage.prototype,'setItem');
         document.querySelector('.js-summary-container').innerHTML = `<div class="js-order-summary"></div>`
+        loadLocalStorage();
+        spyOn (Storage.prototype,'setItem');
         renderCheckoutHTML();
     });
-
-    it('carts products',()=>{
-       document.querySelector('.js-summary-container').innerHTML = '';
+    afterEach(()=>{
+        document.querySelector('.js-summary-container').innerHTML = '';
     });
+
+    it('carts products prices',()=>{
+       expect(document.querySelector(`.js-product-price-${productId1}`).innerText).toContain('$10.90')
+    });
+    
+    it ('delivery option',()=>{
+        expect(document.querySelector(`.js-delivery-option-${productId1}-${3}`).innerHTML).toContain('checked');
+        expect(cart.length).toEqual(2);
+                                                                          
+    })
 })

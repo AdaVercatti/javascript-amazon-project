@@ -44,7 +44,7 @@ export function renderCheckoutHTML(){
                     <div class="product-name">
                       ${matchingItem.name}
                     </div>
-                    <div class="product-price">
+                    <div class="product-price js-product-price-${matchingItem.id}">
                       $${formatCurrency(matchingItem.priceCents)}
                     </div>
                     <div class="product-quantity">
@@ -145,14 +145,17 @@ export function renderCheckoutHTML(){
 
     function deliveryOptionsHTML (matchingItem,cartItem){
       let HTML= '';
+      let counter = 0;
       deliveryOptions.forEach((deliveryOption) => {
         const today = dayjs();
         const deliveryDate = today.add(deliveryOption.deliveryDays,'day');
         const format = deliveryDate.format('dddd, MMM D');
         const deliveryPrice = deliveryOption.priceCents ? `$${formatCurrency(deliveryOption.priceCents)} -` : 'FREE' ;
         const isChecked = cartItem.deliveryOptionId === deliveryOption.id;
+        counter++;
         HTML += `
-                    <div class="delivery-option js-delivery-option" data-option-id = "${deliveryOption.id}" data-product-id="${matchingItem.id}" >
+                    <div class="delivery-option js-delivery-option js-delivery-option-${matchingItem.id}-${counter}" 
+                    data-option-id = "${deliveryOption.id}" data-product-id="${matchingItem.id}" >
                       <input type="radio"
                         ${isChecked ? 'checked' : ''}
                         class="delivery-option-input"
