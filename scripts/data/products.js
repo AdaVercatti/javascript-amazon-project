@@ -22,8 +22,32 @@ class Product {
   priceDollar(){
     return `${formatCurrency(this.priceCents)}`
   }
+
+  extraInfoHTML(){
+    return '';
+  }
+};
+
+
+
+
+
+class Cloths extends Product {
+  sizeChartLink;
+
+  constructor(productDetails){
+    super(productDetails);
+    this.sizeChartLink = productDetails.sizeChartLink;
+  };
+
+  extraInfoHTML(){
+    return `
+    <a href="${this.sizeChartLink}" target="_blank">
+      Size chart
+    </a>
+    `
+  }
 }
- 
  
  
  
@@ -708,5 +732,8 @@ class Product {
     priceCents: 4000
   }
 ].map((productDetail)=>{
+  if(productDetail.type === 'clothing'){
+    return new Cloths(productDetail)
+  }
   return new Product(productDetail);
 })
