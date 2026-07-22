@@ -91,6 +91,8 @@ export function loadProducts (fun){
       return new Product(productDetail);
       });
 
+      console.log('product loaded')
+
       fun();
     });
 

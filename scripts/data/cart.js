@@ -77,3 +77,20 @@
         matchingItem.deliveryOptionId = deliveryOptionId;
         saveCart();
     }
+
+
+
+
+    export function loadCart (fun){
+        const xhr = new XMLHttpRequest();
+    
+        xhr.addEventListener('load',()=>{
+            console.log('cart loaded')
+            fun();
+        });
+    
+    
+        xhr.open('GET','https://supersimplebackend.dev/carts');
+        xhr.send();
+    
+    }
