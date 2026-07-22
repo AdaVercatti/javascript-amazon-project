@@ -8,6 +8,20 @@ import { loadCart } from "./data/cart.js";
 
 
 
+
+async function loadPage(){
+    await loadProductsFetch();
+    const value = await new Promise((resolve)=>{
+        loadCart(()=>[
+            resolve('value')
+        ])
+    });
+    renderCheckoutHTML();
+    renderOrderSummary();
+}
+loadPage();
+
+/*
 Promise.all([
     loadProductsFetch(),
     new Promise ((resolve)=>{

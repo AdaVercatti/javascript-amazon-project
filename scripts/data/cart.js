@@ -92,5 +92,4 @@
     
         xhr.open('GET','https://supersimplebackend.dev/carts');
         xhr.send();
-    
     }
